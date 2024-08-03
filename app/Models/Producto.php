@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     use HasFactory;
+
+    protected $table = 'producto';
+
+    //Listado de campos para modificar
+    protected $fillable = [
+        'nombre',
+        'precio',
+        'categoria',
+        'existencia'
+    ];
 }
