@@ -32,10 +32,10 @@ class productoController extends Controller
     public function store(Request $request)
     {
         $validacion = Validator::make($request->all(), [
-            'nombre' => 'required',
-            'precio' => 'required',
-            'categoria' => 'required',
-            'existencia' => 'required'
+            'nombre' => 'required|max: 255',
+            'precio' => 'required|max: 10',
+            'categoria' => 'required|max: 255',
+            'existencia' => 'required|in:Si,No'
         ]);
 
         if ($validacion->fails()) {
