@@ -14,6 +14,4 @@ Route::put('/productos/{id}', function () {
     return 'Actualizacion de productos';
 });
 
-Route::delete('/productos/{id}', function () {
-    return 'Borrado de productos';
-});
+Route::delete('/productos/{id}', [productoController::class, 'delete']);
