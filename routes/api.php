@@ -10,9 +10,7 @@ Route::get('/productos/{id}', function () {
     return 'Listado de producto';
 });
 
-Route::post('/productos', function () {
-    return 'Creacion de productos';
-});
+Route::post('/productos', [productoController::class, 'store']);
 
 Route::put('/productos/{id}', function () {
     return 'Actualizacion de productos';
