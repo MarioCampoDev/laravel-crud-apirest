@@ -1,11 +1,10 @@
 <?php
 
+use App\Http\Controllers\productoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/productos', function () {
-    return 'Listado de productos';
-});
+Route::get('/productos', [productoController::class, 'index']);
 
 Route::get('/productos/{id}', function () {
     return 'Listado de producto';
