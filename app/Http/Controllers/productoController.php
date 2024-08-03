@@ -69,4 +69,25 @@ class productoController extends Controller
 
         return response()->json($data, 201);
     }
+
+    public function show($id)
+    {
+        $producto = Producto::find($id);
+
+        if (!$producto) {
+            $data = [
+                'message' => 'No se encontro el producto.',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+
+        $data = [
+            'producto' => $producto,
+            'status' => 200
+        ];
+
+        return response()->json($data, 200);
+
+    }
 }

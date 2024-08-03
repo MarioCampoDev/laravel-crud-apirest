@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/productos', [productoController::class, 'index']);
 
-Route::get('/productos/{id}', function () {
-    return 'Listado de producto';
-});
+Route::get('/productos/{id}', [productoController::class, 'show']);
 
 Route::post('/productos', [productoController::class, 'store']);
 
