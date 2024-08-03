@@ -12,4 +12,6 @@ Route::post('/productos', [productoController::class, 'store']);
 
 Route::put('/productos/{id}', [productoController::class, 'update']);
 
+Route::patch('/productos/{id}', [productoController::class, 'lessUpdate']);
+
 Route::delete('/productos/{id}', [productoController::class, 'delete']);

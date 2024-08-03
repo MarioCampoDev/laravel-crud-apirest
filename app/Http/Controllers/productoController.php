@@ -155,4 +155,59 @@ class productoController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function lessUpdate(Request $request, $id)
+    {
+        $producto = Producto::find($id);
+
+        if (!$producto) {
+            $data = [
+                'message' => 'No se encontro el producto.',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+
+        $validacion = Validator::make($request->all(), [
+            'nombre' => 'max: 255',
+            'precio' => 'max: 10',
+            'categoria' => 'max: 255',
+            'existencia' => 'in:Si,No'
+        ]);
+
+        if ($validacion->fails()) {
+            $data = [
+                'message' => 'Error en la validacion de los datos.',
+                'errors' => $validacion->errors(),
+                'status' => 400
+            ];
+            return response()->json($data, 400);
+        }
+
+        if ($request->has('nombre')) {
+            $producto->nombre = $request->nombre;
+        }
+
+        if ($request->has('precio')) {
+            $producto->precio = $request->precio;
+        }
+
+        if ($request->has('categoria')) {
+            $producto->categoria = $request->categoria;
+        }
+
+        if ($request->has('existencia')) {
+            $producto->existencia = $request->existencia;
+        }
+
+        $producto->save();
+
+        $data = [
+            'message' => 'Producto unico actualizado.',
+            'producto' => $producto,
+            'status' => 200
+        ];
+
+        return response()->json($data, 200);
+    }
 }
