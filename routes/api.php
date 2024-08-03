@@ -10,8 +10,6 @@ Route::get('/productos/{id}', [productoController::class, 'show']);
 
 Route::post('/productos', [productoController::class, 'store']);
 
-Route::put('/productos/{id}', function () {
-    return 'Actualizacion de productos';
-});
+Route::put('/productos/{id}', [productoController::class, 'update']);
 
 Route::delete('/productos/{id}', [productoController::class, 'delete']);

@@ -111,4 +111,48 @@ class productoController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function update(Request $request, $id)
+    {
+        $producto = Producto::find($id);
+
+        if (!$producto) {
+            $data = [
+                'message' => 'No se encontro el producto.',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+
+        $validacion = Validator::make($request->all(), [
+            'nombre' => 'required|max: 255',
+            'precio' => 'required|max: 10',
+            'categoria' => 'required|max: 255',
+            'existencia' => 'required|in:Si,No'
+        ]);
+
+        if ($validacion->fails()) {
+            $data = [
+                'message' => 'Error en la validacion de los datos.',
+                'errors' => $validacion->errors(),
+                'status' => 400
+            ];
+            return response()->json($data, 400);
+        }
+        
+        $producto->nombre = $request->nombre;
+        $producto->precio = $request->precio;
+        $producto->categoria = $request->categoria;
+        $producto->existencia = $request->existencia;
+        
+        $producto->save();
+
+        $data = [
+            'message' => 'Producto actualizado.',
+            'producto' => $producto,
+            'status' => 200
+        ];
+
+        return response()->json($data, 200);
+    }
 }
